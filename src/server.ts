@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Pool } from "pg";
+import { initializeTables } from "./utils/database";
 
 //* Express application
 const app = express();
@@ -7,11 +7,8 @@ const app = express();
 //* Middlewares
 app.use(express.json());
 
-//* DB connection
-const pool = new Pool({
-	connectionString:
-		"postgresql://neondb_owner:npg_nRM4igHAuvL8@ep-calm-hat-a8teo9ao-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require",
-});
+//* Initialize Tables
+initializeTables();
 
 //? GET / : API root route
 app.get("/", (req: Request, res: Response) => {

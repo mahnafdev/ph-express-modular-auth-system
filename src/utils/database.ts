@@ -1,0 +1,26 @@
+import { Pool } from "pg";
+
+//* DB connection
+const db = new Pool({
+	connectionString:
+		"postgresql://neondb_owner:npg_nRM4igHAuvL8@ep-calm-hat-a8teo9ao-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require",
+});
+
+//* DB schema
+const initializeTables = async () => {
+	await db.query(`
+        CREATE TABLE IF NOT EXISTS users(
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(150) NOT NULL,
+            email VARCHAR(150) UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            phone VARCHAR(20) UNIQUE,
+            age INT,
+            created_at TIMESTAMP DEFAULT NOW(),
+            updated_at TIMESTAMP DEFAULT NOW()
+        )
+        `);
+	console.log("Tables Created");
+};
+
+export { db, initializeTables };

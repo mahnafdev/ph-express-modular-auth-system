@@ -14,13 +14,14 @@ const initializeTables = async () => {
             name VARCHAR(150) NOT NULL,
             email VARCHAR(150) UNIQUE NOT NULL,
             password TEXT NOT NULL,
-            phone VARCHAR(20) UNIQUE,
             age INT,
+            gen TEXT NOT NULL,
+            is_single BOOLEAN NOT NULL,
             created_at TIMESTAMP DEFAULT NOW(),
             updated_at TIMESTAMP DEFAULT NOW()
         )
         `);
-	console.log("Tables Created");
+	console.log("DB Tables Created");
 };
 
 export { db, initializeTables };
